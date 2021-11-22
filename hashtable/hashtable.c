@@ -1,5 +1,5 @@
 #include<stdio.h>
-#define MAX 20
+#define MAX 7
 
 int array[MAX];
 
@@ -50,7 +50,8 @@ void array_print(){
 void array_alter_value(int old_value, int new_value){
     int key = array_search(old_value);
     if (key != -1){
-        array[key] = new_value;
+        array_delete(old_value);
+        array_insert(new_value);
     } else {
         printf("Error: Value does not exist\n");
     }
@@ -65,6 +66,7 @@ int main(void){
     array_delete(85);
     array_print();
     array_search(73);
-    array_alter_value(1050, 5);
+    array_alter_value(1050, 50);
+    array_insert(54);
     array_print();
 }
