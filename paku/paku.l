@@ -15,6 +15,7 @@ void yyerror(char *s);
 [*]     							{ return TIMES; }
 [(]     							{ return P_LEFT; }
 [)]     							{ return P_RIGHT; }
+print								{ return PRINT; }
 int|float               			{ return TYPE; }
 [0-9]+|[0-9]+(\.[0-9]+)?  			{ return NUMBER; }
 [a-zA-Z_][_a-zA-Z0-9]*  			{ return IDENTIFIER; }
