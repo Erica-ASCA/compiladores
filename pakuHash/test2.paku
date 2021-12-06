@@ -1,0 +1,29 @@
+int ladoA
+int ladoB
+int ladoC
+
+read(ladoA)
+read(ladoB)
+read(ladoC)
+
+int x
+x = ladoA + ladoB
+
+if(x > ladoC){
+    int y
+    int r
+    if(ladoA == ladoB == ladoC){
+        r = 1
+        print(r)
+    }else{
+        if(ladoA != ladoB != ladoC){
+            r = 3
+            print(r)
+        }else {
+            r = 2
+            print(r)
+        }
+    }
+}else {
+    print(x)
+}
