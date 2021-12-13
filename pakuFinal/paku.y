@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 #include "hashtable.h"
-#include "astgen.h"
+#include "astcreate.h"
+#include "astrun.h"
 extern FILE* yyin;
 
 void yyerror(struct AstElement** astDest, char *s);
@@ -33,11 +34,11 @@ hashtable *table;
 
 %left P_LEFT P_RIGHT
 
-%token <value> NUMBER
-%token <name> IDENTIFIER TYPE 
+%token <name> IDENTIFIER TYPE
 %token <string> STRING
+%token <value> NUMBER
 %token <operation> OPERATOR NOT
-%type<ast> PROGRAM BLOCK STATEMENT STATEMENTS IF_STMT ATTRIBUTION PRINT_EXP READ_EXP DECLARATION EXP SQRT_EXP
+%type<ast> PRINT_EXP READ_EXP DECLARATION EXP SQRT_EXP PROGRAM BLOCK STATEMENT STATEMENTS IF_STMT ATTRIBUTION
 
 
 %%
@@ -54,10 +55,10 @@ STATEMENTS:
 
 STATEMENT: 
     DECLARATION { $$ = $1; }
-    | ATTRIBUTION { $$ = $1; }
-    | IF_STMT { $$ = $1; }
     | READ_EXP { $$ = $1; }
     | PRINT_EXP { $$ = $1; }
+    | ATTRIBUTION { $$ = $1; }
+    | IF_STMT { $$ = $1; }
     | BLOCK { $$ = $1; }
     | EOL
     ;
@@ -103,8 +104,6 @@ DECLARATION:
 
 %%
 
-#include "astexec.h"
-
 void yyerror(struct AstElement** astDest, char *s)
 {
 	printf("Error: %s\n", s);
@@ -113,17 +112,17 @@ void yyerror(struct AstElement** astDest, char *s)
 
 int main(int argc, char *argv[])
 {
-    struct AstElement *a = 0;
+    struct AstElement *ast = 0;
     table = hash_init(101);
 
     int result;
     yyin = fopen(argv[1], "r");
-    result = yyparse(&a);
+    result = yyparse(&ast);
     if (result == 0){
         printf("Success\n");
     } 
 
-    exec(table, a);
+    exec(table, ast);
  
 	return 0;
 }

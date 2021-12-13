@@ -1,5 +1,5 @@
-#ifndef ASTGEN_H
-#define ASTGEN_H
+#ifndef ASTCREATE_H
+#define ASTCREATE_H
 
 #include <string.h>
 #include <stdio.h>
@@ -7,7 +7,7 @@
 typedef struct AstElement {
     struct AstElement *left;
     struct AstElement *right;
-    char nodetype;
+    char command;
     char *name;
     char *string;
     char *op;
@@ -33,7 +33,7 @@ AstElement* create_if( AstElement* cond, AstElement* left,  AstElement* right);
 AstElement* create_assigment( char*name, AstElement* val)
 {
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'A';
+    result->command = 'A';
     result->name = name;
     result->right = val;
     return result;
@@ -42,7 +42,7 @@ AstElement* create_assigment( char*name, AstElement* val)
 AstElement* create_exp_num(int val)
 {
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'V';
+    result->command = 'V';
     result->val = val;
     return result;
 }
@@ -50,7 +50,7 @@ AstElement* create_exp_num(int val)
 AstElement* create_exp_name(char* name)
 {
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'N';
+    result->command = 'N';
     result->name = name;
     return result;
 }
@@ -58,7 +58,7 @@ AstElement* create_exp_name(char* name)
 AstElement* create_exp_not(AstElement* left, char* op)
 {
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'C';
+    result->command = 'C';
     result->left = left;
     result->op = op;
     return result;
@@ -67,7 +67,7 @@ AstElement* create_exp_not(AstElement* left, char* op)
 AstElement* create_exp(AstElement* left, AstElement* right, char* op)
 {
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'E';
+    result->command = 'E';
     result->left = left;
     result->right = right;
     result->op = op;
@@ -76,7 +76,7 @@ AstElement* create_exp(AstElement* left, AstElement* right, char* op)
 
 AstElement* create_if( AstElement* cond, AstElement* left,  AstElement* right){
     AstElement* result = malloc(sizeof(AstElement));
-    result->nodetype = 'I';
+    result->command = 'I';
     result->left = left;
     result->right = right;
     result->cond = cond;
@@ -89,11 +89,11 @@ AstElement* create_statement(AstElement* result, AstElement* toAppend)
     if(!result)
     {
         result = malloc(sizeof(AstElement));
-        result->nodetype = 'S';
+        result->command = 'S';
         result->count = 0;
         result->statements = 0;
     }
-    result->nodetype = 'S';    
+    result->command = 'S';    
     result->count++;
     result->statements = realloc(result->statements, result->count*sizeof(AstElement));
     result->statements[result->count-1] = toAppend;
@@ -111,35 +111,35 @@ char* remove_quotes(char* s1) {
 
 AstElement* create_sqrt(char* name){
     AstElement* result = malloc(sizeof (AstElement));
-    result->nodetype = 'F';
+    result->command = 'F';
     result->name = name;
     return result; 
 }
 
 AstElement* create_print(char* name){
     AstElement* result = malloc(sizeof (AstElement));
-    result->nodetype = 'P';
+    result->command = 'P';
     result->name = name;
     return result; 
 }
 
 AstElement* create_print_string(char* name){
     AstElement* result = malloc(sizeof (AstElement));
-    result->nodetype = 'B';
+    result->command = 'B';
     result->string = name;
     return result; 
 }
 
 AstElement* create_read(char* name){
     AstElement* result = malloc(sizeof (AstElement));
-    result->nodetype = 'R';
+    result->command = 'R';
     result->name = name;
     return result; 
 }
 
 AstElement* create_declaration(char* type, char* name){
     AstElement* result = malloc(sizeof (AstElement));
-    result->nodetype = 'D';
+    result->command = 'D';
     result->type = type;
     result->name = name;
     return result; 
