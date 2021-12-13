@@ -1251,7 +1251,7 @@ yyreduce:
     {
   case 2: /* PROGRAM: STATEMENTS END  */
 #line 47 "paku.y"
-                   { (*(struct AstElement**)astDest) = (yyvsp[-1].ast); YYACCEPT;}
+                   { *(struct AstElement**)astDest = (yyvsp[-1].ast); YYACCEPT;}
 #line 1256 "paku.tab.c"
     break;
 

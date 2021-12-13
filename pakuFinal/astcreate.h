@@ -1,12 +1,11 @@
 #ifndef ASTCREATE_H
 #define ASTCREATE_H
 
-#include <string.h>
 #include <stdio.h>
 
 typedef struct AstElement {
-    struct AstElement *left;
-    struct AstElement *right;
+    struct AstElement *l;
+    struct AstElement *r;
     char command;
     char *name;
     char *string;
@@ -18,24 +17,12 @@ typedef struct AstElement {
     int count;
 } AstElement;
 
-char* remove_quotes(char* s1);
-AstElement* create_print_string(char* name);
-AstElement* create_assigment(char*name,  AstElement* val);
-AstElement* create_exp_num(int val);
-AstElement* create_exp_name(char*name);
-AstElement* create_exp( AstElement* left,  AstElement* right, char* op);
-AstElement* create_statement( AstElement* dest,  AstElement* toAppend);
-AstElement* create_print(char* name);
-AstElement* create_read(char* name);
-AstElement* create_declaration(char* type, char* name);
-AstElement* create_if( AstElement* cond, AstElement* left,  AstElement* right);
-
 AstElement* create_assigment( char*name, AstElement* val)
 {
     AstElement* result = malloc(sizeof(AstElement));
     result->command = 'A';
     result->name = name;
-    result->right = val;
+    result->r = val;
     return result;
 }
 
@@ -55,30 +42,30 @@ AstElement* create_exp_name(char* name)
     return result;
 }
 
-AstElement* create_exp_not(AstElement* left, char* op)
+AstElement* create_exp_not(AstElement* l, char* op)
 {
     AstElement* result = malloc(sizeof(AstElement));
     result->command = 'C';
-    result->left = left;
+    result->l = l;
     result->op = op;
     return result;
 }
 
-AstElement* create_exp(AstElement* left, AstElement* right, char* op)
+AstElement* create_exp(AstElement* l, AstElement* r, char* op)
 {
     AstElement* result = malloc(sizeof(AstElement));
     result->command = 'E';
-    result->left = left;
-    result->right = right;
+    result->l = l;
+    result->r = r;
     result->op = op;
     return result;
 }
 
-AstElement* create_if( AstElement* cond, AstElement* left,  AstElement* right){
+AstElement* create_if( AstElement* cond, AstElement* l,  AstElement* r){
     AstElement* result = malloc(sizeof(AstElement));
     result->command = 'I';
-    result->left = left;
-    result->right = right;
+    result->l = l;
+    result->r = r;
     result->cond = cond;
     return result;
 }

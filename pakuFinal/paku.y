@@ -44,7 +44,7 @@ hashtable *table;
 %%
 
 PROGRAM:    
-    STATEMENTS END { (*(struct AstElement**)astDest) = $1; YYACCEPT;}
+    STATEMENTS END { *(struct AstElement**)astDest = $1; YYACCEPT;}
     ;
 
 STATEMENTS:  

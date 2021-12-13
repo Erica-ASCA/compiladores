@@ -5,6 +5,7 @@ int dez
 int cinc
 int um
 
+print("Digite o valor para sacar (menor que 600)")
 read(n)
 
 if (n > 10 || n < 600) {

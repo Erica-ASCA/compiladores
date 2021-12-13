@@ -4,6 +4,8 @@ int ano
 int z
 int y
 
+print("Digite uma data")
+
 read(dia)
 read(mes)
 read(ano)

@@ -5,15 +5,15 @@
 #include "hashtable.h"
 #include "math.h"
 
-int operator(char* op, int left, int right);
+int operator(char* op, int l, int r);
 static void run_statement(hashtable *table, AstElement* node);
 int eval_expr(hashtable *table, AstElement* node);
 static void exec(hashtable *table, AstElement* a);
 
 int eval_expr(hashtable *table, AstElement* node)
 {    
-    int left;
-    int right;
+    int l;
+    int r;
 
     Variable* variable = (Variable*)malloc(sizeof(Variable));
 
@@ -26,16 +26,16 @@ int eval_expr(hashtable *table, AstElement* node)
         return hash_lookup(table,node->name)->value;
         break;
     case 'E':
-        left = eval_expr(table,node->left);
-        right = eval_expr(table,node->right);
-        return operator(node->op, left, right);
+        l = eval_expr(table,node->l);
+        r = eval_expr(table,node->r);
+        return operator(node->op, l, r);
     case 'C':
-        int number = hash_lookup(table,node->left->name)->value;
+        int number = hash_lookup(table,node->l->name)->value;
         if (number != 0)
-            left = 0;
+            l = 0;
         if (number == 0)
-            left = 1;
-        return left;
+            l = 1;
+        return l;
     case 'F':
         int result;
         result = sqrt(hash_lookup(table,node->name)->value);
@@ -69,7 +69,7 @@ static void run_statement(hashtable *table, AstElement* node)
 
     case 'R':     
         variable->name = node->name;
-        printf("Value: ");
+        printf("Input: ");
         scanf("%lf", &variable->value );
         hash_insert(table, node->name, variable);
         break;
@@ -78,10 +78,10 @@ static void run_statement(hashtable *table, AstElement* node)
         result = eval_expr(table, node->cond);
 
         if(result){
-            exec(table, node->left);
+            exec(table, node->l);
         }else{
-            if(node->right){
-                exec(table, node->right);
+            if(node->r){
+                exec(table, node->r);
             }            
         }
         break;
@@ -93,7 +93,7 @@ static void run_statement(hashtable *table, AstElement* node)
 
     case 'A':               
         variable->name = node->name;
-        variable->value = eval_expr(table, node->right);
+        variable->value = eval_expr(table, node->r);
         hash_insert(table, node->name,variable);
         break;
     
@@ -112,34 +112,34 @@ static void exec(hashtable *table, AstElement* a)
     }
 }
 
-int operator(char* op, int left, int right){
+int operator(char* op, int l, int r){
     if (strcmp(op, "+") == 0){
-        return left + right;
+        return l + r;
     } else if (strcmp(op, "-") == 0){
-        return left - right;
+        return l - r;
     } else if (strcmp(op, "/") == 0){
-        return left / right;
+        return l / r;
     } else if (strcmp(op, "*") == 0){
-        return left * right;
+        return l * r;
     } else if (strcmp(op, ">=" )== 0){
-        return left >= right;
+        return l >= r;
     } else if (strcmp(op, "<=") == 0){
-        return left <= right;
+        return l <= r;
     } else if (strcmp(op, "!=") == 0){
-        return left != right;
+        return l != r;
     } else if (strcmp(op, "<") == 0){
-        return left < right;
+        return l < r;
     } else if (strcmp(op, ">") == 0){
-        return left > right;
+        return l > r;
     } else if (strcmp(op, "==") == 0){
-        return left == right;
+        return l == r;
     } else if (strcmp(op, "&&") == 0){
-        return left && right;
+        return l && r;
     } else if (strcmp(op, "||") == 0){
-        return left || right;
+        return l || r;
     } else if (strcmp(op, "%") == 0){
-        int a = left;
-        int b = right;
+        int a = l;
+        int b = r;
         return a % b;
     } else {
         return 0;
