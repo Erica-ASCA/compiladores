@@ -1,0 +1,36 @@
+float a
+float b
+float c
+float x1
+float x2
+float delta
+
+print("Valor de a:")
+read(a)
+
+if(a > 0) {
+    print("Valor de b:")
+    read(b)
+    print("Valor de c:")
+    read(c)
+
+    delta = (b * b) - (4 * a * c)
+    float z
+    z = sqrt(delta)
+    b = b * 0 - 1
+    x1 = (b + z) / (2*a)
+    x2 = (b - z) / (2*a)
+
+    if(delta < 0) {
+        print("nao possui raizes reais")
+    }
+
+    if(delta == 0) {
+        print(x1)
+    }
+
+    if(delta > 0) {
+        print(x1)
+        print(x2)
+    }
+}

@@ -1,0 +1,26 @@
+int n
+int cem
+int cinq
+int dez
+int cinc
+int um
+
+read(n)
+
+if (n > 10 || n < 600) {
+    cem = n/100
+    n = n % 100
+    cinq = n/50
+    n = n % 50
+    dez = n/10
+    n = n % 10
+    cinc = n/5
+    n = n % 5
+    um = n
+
+    print(cem)
+    print(cinq)
+    print(dez)
+    print(cinc)
+    print(um)
+}

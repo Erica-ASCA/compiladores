@@ -1,0 +1,23 @@
+int ano
+print("Digite o ano")
+read(ano)
+
+int a
+int b
+int c
+a = ano % 4
+print(a)
+b = ano % 400
+print(b)
+c = ano % 100
+print(c)
+
+if(a == 0){
+    if (b == 0 || c != 0){
+        print("Ano bissexto")
+    } else {
+        print("Nao bissexto")
+    }
+} else {
+    print("Nao bissexto")
+}

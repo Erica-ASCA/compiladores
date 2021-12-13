@@ -1,0 +1,57 @@
+int dia
+int mes
+int ano
+int z
+int y
+
+read(dia)
+read(mes)
+read(ano)
+
+int a
+int b
+int c
+z = 0
+y = 0
+a = ano % 4
+print("")
+b = ano % 400
+print("")
+c = ano % 100
+print("")
+
+if(a == 0){
+    if (b == 0 || c != 0){
+        z = 1
+        print("")
+    }
+}
+
+if (z == 1){
+    if (mes == 2){
+        if (dia > 0 || dia < 29){
+            y = 1
+            print("")
+        }
+    }
+}
+
+if (mes > 0 || mes < 12){
+    if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
+        if (dia > 0 || dia < 31) {
+            y = 1
+            print("")
+        }
+    } else {
+        if (dia > 0 || dia < 32) {
+            y = 1
+            print("")
+        }
+    }
+}
+
+if (y) {
+    print("data valida")
+} else {
+    print("data invalida")
+}

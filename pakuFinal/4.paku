@@ -1,0 +1,24 @@
+int n
+int c
+int d
+int u
+
+read(n)
+
+c = n / 100
+print(c)
+d = (n - ( c * 100 ) ) / 10
+print(d)
+u = n - ( (c * 100) + (d * 10))
+print(u)
+
+if( n <= 1000 ){
+    print(c)
+    print(" centenas, ")
+    print(d)
+	print(" dezenas e ")
+    print(u)
+	print(" unidades")
+} else {
+    print("invalido")
+}
