@@ -1609,7 +1609,7 @@ int main(int argc, char *argv[])
     int result;
     yyin = fopen(argv[1], "r");
     result = yyparse(&ast);
-    if (result == 0){
+    if (result == 0) {
         printf("Success\n");
     } 
 

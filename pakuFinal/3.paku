@@ -22,8 +22,8 @@ print("")
 c = ano % 100
 print("")
 
-if(a == 0){
-    if (b == 0 || c != 0){
+if(a == 0) {
+    if ((b == 0) || (c != 0)){
         z = 1
         print("")
     }
@@ -31,28 +31,49 @@ if(a == 0){
 
 if (z == 1){
     if (mes == 2){
-        if (dia > 0 || dia < 29){
-            y = 1
-            print("")
-        }
-    }
-}
-
-if (mes > 0 || mes < 12){
-    if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
-        if (dia > 0 || dia < 31) {
+        if ((dia > 0) && (dia < 30)){
             y = 1
             print("")
         }
     } else {
-        if (dia > 0 || dia < 32) {
+        if ((mes > 0 ) && (mes < 12)){
+            if ((mes == 4) || (mes == 6) || (mes == 9) || (mes == 11)){
+                if ((dia > 0) || (dia < 31)) {
+                    y = 1
+                    print("")
+                }
+            } else {
+                if ((dia > 0) && (dia < 32)) {
+                    y = 1
+                    print("")
+                }
+            }
+        }
+    }
+} else {
+    if (mes == 2){
+        if ((dia > 0) && (dia < 29)){
             y = 1
             print("")
+        }
+    } else {
+        if ((mes > 0 ) && (mes < 12)){
+            if ((mes == 4) || (mes == 6) || (mes == 9) || (mes == 11)){
+                if ((dia > 0) || (dia < 31)) {
+                    y = 1
+                    print("")
+                }
+            } else {
+                if ((dia > 0) && (dia < 32)) {
+                    y = 1
+                    print("")
+                }
+            }
         }
     }
 }
 
-if (y) {
+if (y == 1) {
     print("data valida")
 } else {
     print("data invalida")
